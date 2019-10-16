@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Maria Prudyvus
+  description: Cron task for db backup
+  company: Course
+
+  license: MIT
+
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+
+  galaxy_tags: [maintenance, postgres]
+
+dependencies: []

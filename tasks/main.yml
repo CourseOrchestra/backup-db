@@ -1,0 +1,13 @@
+---
+- name: create dumpall file
+  template:
+    src: dump.j2
+    dest: /var/dumpdb
+    mode: a+x
+
+- name: cron task
+  cron:
+    name: backup db
+    hour: "{{ dump_hour }}"
+    minute: "{{ dump_minute }}"
+    job: "/var/dumpdb"

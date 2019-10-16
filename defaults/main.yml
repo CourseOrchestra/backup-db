@@ -1,0 +1,10 @@
+---
+dump_exclude_schemas: []
+dump_db_host: ""
+dump_reindex: yes
+dump_db: []
+dump_name: $(date '+%A')_dump
+dump_hour: 0
+dump_minute: 30
+dump_db_user: postgres
+dump_db_pwd: ""
