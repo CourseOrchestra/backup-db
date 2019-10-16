@@ -3,7 +3,7 @@ bck_name={{ db }}_{{ dump_name }}.backup.gz
 
 {% if dump_db_pwd %}export PGPASSWORD={{ dump_db_pwd }}{% endif %}
 
-pg_dump -h "{{ dump_db_host }}" -U {{ dump_db_user }} -d {{ db }} {% for schema in dump_exclude_schemas %}-N '{{ schema }}'{% endfor %} --format tar --blobs --encoding UTF8 | gzip > $bck_name
+pg_dump -h "{{ dump_db_host }}" -U {{ dump_db_user }} -d {{ db }} {% for schema in dump_exclude_schemas %}-N '{{ schema }}'{% endfor %} {% for table in dump_exclude_tables %}-T '{{ table }}'{% endfor %} --format tar --blobs --encoding UTF8 | gzip > $bck_name
 
 curl -T $bck_name ftp://{{ ftp_user }}:{{ ftp_pwd }}@{{ ftp_address.rstrip('/') }}/$bck_name
 
