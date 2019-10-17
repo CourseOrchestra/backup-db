@@ -13,3 +13,4 @@ dump_file_name: /var/dumpdb
 dump_extra_script: ""
 dump_attempt: 5
 dump_attempt_interval: 5  # in seconds
+dump_cron_task_name: backup db

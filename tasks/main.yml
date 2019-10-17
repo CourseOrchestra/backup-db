@@ -7,7 +7,7 @@
 
 - name: cron task
   cron:
-    name: backup db
+    name: "{{ dump_cron_task_name }}"
     hour: "{{ dump_hour }}"
     minute: "{{ dump_minute }}"
     job: "{{ dump_file_name }}"
