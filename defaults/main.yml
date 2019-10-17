@@ -10,3 +10,4 @@ dump_reindex: yes
 dump_hour: 0
 dump_minute: 30
 dump_file_name: /var/dumpdb
+dump_extra_script: ""

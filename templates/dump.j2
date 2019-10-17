@@ -11,7 +11,7 @@ if [ $? -eq 0 ]; then
     rm $bck_name
 fi
 {% endfor %}
-{{ extra_script }}
+{{ dump_extra_script }}
 
 {% if dump_reindex %}
 {% for db in dump_db %}
