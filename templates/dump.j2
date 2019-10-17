@@ -1,3 +1,4 @@
+#!/bin/bash
 {% for db in dump_db %}
 bck_name={{ db }}_{{ dump_name }}.backup.gz
 
@@ -5,11 +6,17 @@ bck_name={{ db }}_{{ dump_name }}.backup.gz
 
 pg_dump -h "{{ dump_db_host }}" -U {{ dump_db_user }} -d {{ db }} {% for schema in dump_exclude_schemas %}-N '{{ schema }}'{% endfor %} {% for table in dump_exclude_tables %}-T '{{ table }}'{% endfor %} --format tar --blobs --encoding UTF8 | gzip > $bck_name
 
-curl -T $bck_name ftp://{{ ftp_user }}:{{ ftp_pwd }}@{{ ftp_address.rstrip('/') }}/$bck_name
+iter=0
+while [ $iter -le {{ dump_attempt }} ]
+do
+    curl -T $bck_name ftp://{{ ftp_user }}:{{ ftp_pwd }}@{{ ftp_address.rstrip('/') }}/$bck_name
 
-if [ $? -eq 0 ]; then
-    rm $bck_name
-fi
+    if [ $? -eq 0 ]; then
+        rm $bck_name
+        iter={{ dump_attempt + 1}}
+    fi
+    sleep {{ dump_attempt_interval }}
+done
 {% endfor %}
 {{ dump_extra_script }}
 
