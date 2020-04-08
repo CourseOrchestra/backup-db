@@ -16,7 +16,7 @@ do
         rm $bck_file_name
         iter={{ dump_attempt + 1}}
     fi
-    iter=iter+1
+    iter++
     sleep {{ dump_attempt_interval }}
 done
 {% endfor %}
