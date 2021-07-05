@@ -24,7 +24,7 @@ done
 
 {% if dump_reindex %}
 {% for db in dump_db %}
-psql -h "{{ dump_db_host }}" -d {{ db }} -U {{ dump_db_user }} -w --command "reindex DATABASE {{ db }};"
+psql -h "{{ dump_db_host }}" -d {{ db }} -U {{ dump_db_user }} -w --command "reindex DATABASE \"{{ db }}\";"
 psql -h "{{ dump_db_host }}" -d {{ db }} -U {{ dump_db_user }} -w --command "vacuum full analyze;"
 {% endfor %}
 {% endif %}
